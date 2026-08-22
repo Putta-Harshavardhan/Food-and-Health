@@ -1,0 +1,2511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NutriLife</title>
+
+
+    <!-- ==================================================
+         INTERNAL CSS
+    =================================================== -->
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f6f8f7;
+            color: #26382e;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 64px;
+            background: white;
+            border-bottom: 1px solid #e1e7e3;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5%;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: #267647;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 5px;
+        }
+
+        .nav-links button {
+            border: none;
+            background: transparent;
+
+            padding: 9px 14px;
+
+            border-radius: 7px;
+
+            color: #65736b;
+
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+        .nav-links button:hover {
+            background: #edf6f0;
+            color: #267647;
+        }
+
+        .nav-links button.active {
+            background: #e5f3ea;
+            color: #267647;
+            font-weight: bold;
+        }
+
+
+        /* ================= PAGES ================= */
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #155b35,
+                    #2d8051
+                );
+
+            color: white;
+
+            text-align: center;
+
+            padding: 70px 20px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            max-width: 570px;
+            margin: auto;
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.92;
+        }
+
+        .hero-buttons {
+            margin-top: 25px;
+
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .hero-buttons button {
+            padding: 11px 22px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .explore-btn {
+            border: none;
+            background: white;
+            color: #155b35;
+        }
+
+        .bmi-hero-btn {
+            border: 1px solid white;
+            background: transparent;
+            color: white;
+        }
+
+
+        /* ================= STATS ================= */
+
+        .stats {
+            background: white;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            border-bottom: 1px solid #e1e7e3;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 22px;
+
+            border-right: 1px solid #e1e7e3;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 27px;
+            color: #267647;
+        }
+
+        .stat span {
+            font-size: 13px;
+            color: #748078;
+        }
+
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            width: 90%;
+            max-width: 850px;
+
+            margin: auto;
+
+            padding: 40px 0 60px;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            margin-bottom: 7px;
+        }
+
+        .subtitle {
+            color: #738078;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+
+        /* ================= QUICK ACCESS ================= */
+
+        .quick-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin: 20px 0 30px;
+        }
+
+        .quick-card {
+            background: white;
+
+            border: 1px solid #e0e7e2;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .quick-card:hover {
+            transform: translateY(-3px);
+
+            border-color: #267647;
+
+            box-shadow:
+                0 7px 20px rgba(0,0,0,0.06);
+        }
+
+        .quick-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .quick-card h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .quick-card p {
+            color: #748078;
+            font-size: 13px;
+        }
+
+
+        /* ================= INFO ================= */
+
+        .info-box {
+            background: #e8f5ed;
+
+            border: 1px solid #b9dbc6;
+
+            border-radius: 12px;
+
+            padding: 20px;
+        }
+
+        .info-box h3 {
+            color: #1c6239;
+
+            margin-bottom: 6px;
+
+            font-size: 15px;
+        }
+
+        .info-box p {
+            color: #387051;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ================= SEARCH ================= */
+
+        .search {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1px solid #d5ded8;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+        .search:focus {
+            border-color: #267647;
+        }
+
+
+        /* ================= FOOD GRID ================= */
+
+        .food-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+        .food-card {
+            background: white;
+
+            border: 1px solid #e0e7e2;
+
+            border-radius: 12px;
+
+            padding: 18px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-3px);
+
+            border-color: #267647;
+        }
+
+        .food-emoji {
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
+
+        .food-card h3 {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .food-card p {
+            color: #748078;
+            font-size: 12px;
+        }
+
+
+        /* ================= FOOD DETAILS ================= */
+
+        .food-details {
+            display: none;
+
+            background: white;
+
+            border: 1px solid #dfe7e2;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            margin-bottom: 20px;
+        }
+
+        .food-details.show {
+            display: block;
+        }
+
+        .food-details h3 {
+            margin-bottom: 15px;
+        }
+
+        .nutrition-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 9px 0;
+
+            border-bottom: 1px solid #edf0ee;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= TOOL ================= */
+
+        .tool-card {
+            background: white;
+
+            border: 1px solid #e0e7e2;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            margin-bottom: 20px;
+        }
+
+        .tool-card h3 {
+            margin-bottom: 20px;
+
+            font-size: 18px;
+        }
+
+        .form-row {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+
+            color: #65736b;
+
+            font-size: 13px;
+
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+
+            padding: 11px;
+
+            border: 1px solid #d5ded8;
+
+            border-radius: 7px;
+
+            outline: none;
+
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #267647;
+        }
+
+
+        /* ================= BUTTON ================= */
+
+        .green-btn {
+            width: 100%;
+
+            border: none;
+
+            background: #267647;
+
+            color: white;
+
+            padding: 12px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            margin-top: 5px;
+        }
+
+        .green-btn:hover {
+            background: #155b35;
+        }
+
+
+        /* ================= RESULT ================= */
+
+        .result {
+            display: none;
+
+            margin-top: 20px;
+
+            background: #eaf6ef;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            text-align: center;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-number {
+            font-size: 40px;
+
+            color: #267647;
+
+            font-weight: bold;
+        }
+
+        .result p {
+            color: #526159;
+
+            font-size: 14px;
+        }
+
+
+        /* ================= CALORIE RESULT ================= */
+
+        .calorie-result {
+            display: none;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            margin-top: 20px;
+
+            background: #f5f8f6;
+
+            border-radius: 10px;
+
+            padding: 15px;
+
+            text-align: center;
+        }
+
+        .calorie-result.show {
+            display: grid;
+        }
+
+        .calorie-box {
+            padding: 8px;
+        }
+
+        .calorie-box:nth-child(2) {
+            border-left: 1px solid #dce3de;
+
+            border-right: 1px solid #dce3de;
+        }
+
+        .calorie-box small {
+            display: block;
+
+            color: #748078;
+
+            font-size: 11px;
+        }
+
+        .calorie-box strong {
+            display: block;
+
+            color: #267647;
+
+            font-size: 21px;
+
+            margin: 4px 0;
+        }
+
+        .calorie-box span {
+            font-size: 10px;
+
+            color: #748078;
+        }
+
+
+        /* ================= WATER ================= */
+
+        .water-cups {
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+            margin: 15px 0;
+        }
+
+        .water-cup {
+            font-size: 35px;
+
+            cursor: pointer;
+
+            opacity: 0.3;
+
+            transition: 0.2s;
+        }
+
+        .water-cup.filled {
+            opacity: 1;
+        }
+
+        .water-cup:hover {
+            transform: scale(1.1);
+        }
+
+        .water-message {
+            color: #267647;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+
+        /* ================= MEAL PLANNER ================= */
+
+        .meal-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+        .meal-card {
+            background: white;
+
+            border: 1px solid #e0e7e2;
+
+            border-radius: 12px;
+
+            padding: 22px;
+
+            text-align: center;
+
+            cursor: pointer;
+        }
+
+        .meal-card:hover {
+            border-color: #267647;
+        }
+
+        .meal-card.selected {
+            background: #e8f5ed;
+
+            border-color: #267647;
+        }
+
+        .meal-icon {
+            font-size: 35px;
+
+            margin-bottom: 8px;
+        }
+
+        .meal-card h3 {
+            font-size: 15px;
+
+            margin-bottom: 5px;
+        }
+
+        .meal-card p {
+            color: #748078;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= MEAL OPTIONS ================= */
+
+        .meal-options {
+            display: none;
+
+            background: white;
+
+            border: 1px solid #e0e7e2;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            margin-top: 20px;
+        }
+
+        .meal-options.show {
+            display: block;
+        }
+
+
+        /* ================= TOTAL ================= */
+
+        .total {
+            margin-top: 20px;
+
+            background: #e8f5ed;
+
+            border: 1px solid #b9dbc6;
+
+            border-radius: 10px;
+
+            padding: 17px;
+
+            display: flex;
+
+            justify-content: space-between;
+        }
+
+        .total strong {
+            color: #267647;
+
+            font-size: 19px;
+        }
+
+
+        /* ================= TIPS ================= */
+
+        .tip-list {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .tip {
+            background: white;
+
+            border: 1px solid #e0e7e2;
+
+            border-radius: 11px;
+
+            padding: 18px;
+
+            display: flex;
+
+            gap: 15px;
+        }
+
+        .tip-icon {
+            font-size: 28px;
+
+            width: 45px;
+
+            height: 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #e8f5ed;
+
+            border-radius: 10px;
+
+            flex-shrink: 0;
+        }
+
+        .tip h3 {
+            font-size: 15px;
+
+            margin-bottom: 4px;
+        }
+
+        .tip p {
+            color: #748078;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                height: auto;
+
+                padding: 12px;
+
+                flex-direction: column;
+
+                gap: 10px;
+            }
+
+            .nav-links {
+                width: 100%;
+
+                overflow-x: auto;
+            }
+
+            .nav-links button {
+                white-space: nowrap;
+
+                font-size: 12px;
+
+                padding: 8px 10px;
+            }
+
+            .hero {
+                padding: 50px 18px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: none;
+
+                border-bottom: 1px solid #e1e7e3;
+            }
+
+            .quick-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .food-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .meal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calorie-result {
+                grid-template-columns: 1fr;
+            }
+
+            .calorie-box:nth-child(2) {
+                border-left: none;
+                border-right: none;
+
+                border-top: 1px solid #dce3de;
+                border-bottom: 1px solid #dce3de;
+            }
+        }
+
+
+        @media (max-width: 400px) {
+
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                width: 92%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         NAVBAR
+    =================================================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🌿 NutriLife
+        </div>
+
+        <div class="nav-links">
+
+            <button
+                class="active"
+                onclick="showPage('home', this)">
+                Home
+            </button>
+
+            <button
+                onclick="showPage('foods', this)">
+                Foods
+            </button>
+
+            <button
+                onclick="showPage('tools', this)">
+                Health Tools
+            </button>
+
+            <button
+                onclick="showPage('planner', this)">
+                Meal Planner
+            </button>
+
+            <button
+                onclick="showPage('tips', this)">
+                Tips
+            </button>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ==================================================
+         HOME
+    =================================================== -->
+
+    <section
+        id="home"
+        class="page active">
+
+
+        <div class="hero">
+
+            <h1>
+                Eat Smart. Live Well.
+            </h1>
+
+            <p>
+                Your complete guide to nutrition,
+                healthy eating and building habits
+                that last.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <button
+                    class="explore-btn"
+                    onclick="goToPage('foods')">
+                    Explore Foods
+                </button>
+
+                <button
+                    class="bmi-hero-btn"
+                    onclick="goToPage('tools')">
+                    Check My BMI
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <strong>50+</strong>
+
+                <span>
+                    Healthy Foods
+                </span>
+
+            </div>
+
+            <div class="stat">
+
+                <strong>3</strong>
+
+                <span>
+                    Health Tools
+                </span>
+
+            </div>
+
+            <div class="stat">
+
+                <strong>10</strong>
+
+                <span>
+                    Health Tips
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="content">
+
+            <p class="subtitle">
+                Good health starts with what you eat.
+                NutriLife helps you understand nutrition,
+                calculate health numbers, plan meals and
+                build healthy habits.
+            </p>
+
+
+            <h2>
+                Quick Access
+            </h2>
+
+
+            <div class="quick-grid">
+
+                <div
+                    class="quick-card"
+                    onclick="goToPage('foods')">
+
+                    <div class="quick-icon">
+                        🥗
+                    </div>
+
+                    <h3>
+                        Food Database
+                    </h3>
+
+                    <p>
+                        Browse food nutrition information.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="quick-card"
+                    onclick="goToPage('tools')">
+
+                    <div class="quick-icon">
+                        ⚖️
+                    </div>
+
+                    <h3>
+                        BMI Calculator
+                    </h3>
+
+                    <p>
+                        Calculate your BMI.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="quick-card"
+                    onclick="goToPage('planner')">
+
+                    <div class="quick-icon">
+                        📅
+                    </div>
+
+                    <h3>
+                        Meal Planner
+                    </h3>
+
+                    <p>
+                        Plan your daily meals.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="quick-card"
+                    onclick="goToPage('tips')">
+
+                    <div class="quick-icon">
+                        💡
+                    </div>
+
+                    <h3>
+                        Health Tips
+                    </h3>
+
+                    <p>
+                        Learn healthy habits.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <h3>
+                    💡 Did you know?
+                </h3>
+
+                <p>
+                    Eating a variety of fruits and vegetables
+                    can provide different vitamins, minerals
+                    and other nutrients.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         FOODS
+    =================================================== -->
+
+    <section
+        id="foods"
+        class="page">
+
+        <div class="content">
+
+            <h2>
+                Food Database
+            </h2>
+
+            <p class="subtitle">
+                Search foods and view nutrition information.
+            </p>
+
+
+            <input
+                id="foodSearch"
+                class="search"
+                type="text"
+                placeholder="Search food..."
+                oninput="searchFood()">
+
+
+            <div
+                id="foodDetails"
+                class="food-details">
+            </div>
+
+
+            <div
+                id="foodGrid"
+                class="food-grid">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         HEALTH TOOLS
+    =================================================== -->
+
+    <section
+        id="tools"
+        class="page">
+
+        <div class="content">
+
+            <h2>
+                Health Tools
+            </h2>
+
+            <p class="subtitle">
+                Calculate your BMI, calorie needs and
+                track your water intake.
+            </p>
+
+
+            <!-- BMI -->
+
+            <div class="tool-card">
+
+                <h3>
+                    ⚖️ BMI Calculator
+                </h3>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Weight (kg)
+                        </label>
+
+                        <input
+                            id="weight"
+                            type="number"
+                            placeholder="65">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Height (cm)
+                        </label>
+
+                        <input
+                            id="height"
+                            type="number"
+                            placeholder="170">
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="green-btn"
+                    onclick="calculateBMI()">
+
+                    Calculate BMI
+
+                </button>
+
+
+                <div
+                    id="bmiResult"
+                    class="result">
+
+                    <div
+                        id="bmiNumber"
+                        class="result-number">
+                        --
+                    </div>
+
+                    <p id="bmiCategory">
+                        --
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CALORIE -->
+
+            <div class="tool-card">
+
+                <h3>
+                    🔥 Calorie Breakdown
+                </h3>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Age
+                        </label>
+
+                        <input
+                            id="age"
+                            type="number"
+                            placeholder="20">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Gender
+                        </label>
+
+                        <select id="gender">
+
+                            <option value="male">
+                                Male
+                            </option>
+
+                            <option value="female">
+                                Female
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Weight (kg)
+                        </label>
+
+                        <input
+                            id="calWeight"
+                            type="number"
+                            placeholder="65">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Height (cm)
+                        </label>
+
+                        <input
+                            id="calHeight"
+                            type="number"
+                            placeholder="170">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Activity Level
+                    </label>
+
+                    <select id="activity">
+
+                        <option value="1.2">
+                            Sedentary
+                        </option>
+
+                        <option value="1.375">
+                            Lightly Active
+                        </option>
+
+                        <option value="1.55">
+                            Moderately Active
+                        </option>
+
+                        <option value="1.725">
+                            Very Active
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    class="green-btn"
+                    onclick="calculateCalories()">
+
+                    Calculate Calories
+
+                </button>
+
+
+                <div
+                    id="calorieResult"
+                    class="calorie-result">
+
+                    <div class="calorie-box">
+
+                        <small>
+                            Lose
+                        </small>
+
+                        <strong id="lose">
+                            --
+                        </strong>
+
+                        <span>
+                            kcal/day
+                        </span>
+
+                    </div>
+
+
+                    <div class="calorie-box">
+
+                        <small>
+                            Maintain
+                        </small>
+
+                        <strong id="maintain">
+                            --
+                        </strong>
+
+                        <span>
+                            kcal/day
+                        </span>
+
+                    </div>
+
+
+                    <div class="calorie-box">
+
+                        <small>
+                            Gain
+                        </small>
+
+                        <strong id="gain">
+                            --
+                        </strong>
+
+                        <span>
+                            kcal/day
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- WATER -->
+
+            <div class="tool-card">
+
+                <h3>
+                    💧 Water Planner
+                </h3>
+
+                <p class="subtitle">
+                    Goal: 8 glasses per day.
+                    Click a glass to track your intake.
+                </p>
+
+
+                <div
+                    id="waterCups"
+                    class="water-cups">
+                </div>
+
+
+                <p
+                    id="waterMessage"
+                    class="water-message">
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         MEAL PLANNER
+    =================================================== -->
+
+    <section
+        id="planner"
+        class="page">
+
+        <div class="content">
+
+            <h2>
+                Meal Planner
+            </h2>
+
+            <p class="subtitle">
+                Select food for each meal.
+            </p>
+
+
+            <div
+                id="mealGrid"
+                class="meal-grid">
+            </div>
+
+
+            <div
+                id="mealOptions"
+                class="meal-options">
+
+                <h3>
+                    Choose Food
+                </h3>
+
+
+                <div
+                    id="mealFoods"
+                    class="food-grid">
+                </div>
+
+            </div>
+
+
+            <div class="total">
+
+                <span>
+                    Today's Calories
+                </span>
+
+                <strong id="totalCalories">
+                    0 kcal
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         HEALTH TIPS
+    =================================================== -->
+
+    <section
+        id="tips"
+        class="page">
+
+        <div class="content">
+
+            <h2>
+                Health Tips
+            </h2>
+
+            <p class="subtitle">
+                Simple habits for a healthier lifestyle.
+            </p>
+
+
+            <div
+                id="tipList"
+                class="tip-list">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         INTERNAL JAVASCRIPT
+    =================================================== -->
+
+    <script>
+
+        /* ===============================================
+           FOOD DATABASE
+        ================================================ */
+
+        const foods = [
+
+            {
+                name: "Apple",
+                emoji: "🍎",
+                calories: 95,
+                protein: "0.5 g",
+                carbs: "25 g",
+                fat: "0.3 g",
+                fiber: "4 g"
+            },
+
+            {
+                name: "Banana",
+                emoji: "🍌",
+                calories: 105,
+                protein: "1.3 g",
+                carbs: "27 g",
+                fat: "0.4 g",
+                fiber: "3 g"
+            },
+
+            {
+                name: "Broccoli",
+                emoji: "🥦",
+                calories: 55,
+                protein: "3.7 g",
+                carbs: "11 g",
+                fat: "0.6 g",
+                fiber: "5 g"
+            },
+
+            {
+                name: "Chicken Breast",
+                emoji: "🍗",
+                calories: 165,
+                protein: "31 g",
+                carbs: "0 g",
+                fat: "3.6 g",
+                fiber: "0 g"
+            },
+
+            {
+                name: "Egg",
+                emoji: "🥚",
+                calories: 78,
+                protein: "6 g",
+                carbs: "0.6 g",
+                fat: "5 g",
+                fiber: "0 g"
+            },
+
+            {
+                name: "Brown Rice",
+                emoji: "🍚",
+                calories: 216,
+                protein: "5 g",
+                carbs: "45 g",
+                fat: "1.8 g",
+                fiber: "3.5 g"
+            },
+
+            {
+                name: "Spinach",
+                emoji: "🥬",
+                calories: 23,
+                protein: "2.9 g",
+                carbs: "3.6 g",
+                fat: "0.4 g",
+                fiber: "2.2 g"
+            },
+
+            {
+                name: "Salmon",
+                emoji: "🐟",
+                calories: 208,
+                protein: "28 g",
+                carbs: "0 g",
+                fat: "10 g",
+                fiber: "0 g"
+            },
+
+            {
+                name: "Oats",
+                emoji: "🌾",
+                calories: 150,
+                protein: "5 g",
+                carbs: "27 g",
+                fat: "3 g",
+                fiber: "4 g"
+            },
+
+            {
+                name: "Almonds",
+                emoji: "🥜",
+                calories: 164,
+                protein: "6 g",
+                carbs: "6 g",
+                fat: "14 g",
+                fiber: "3.5 g"
+            },
+
+            {
+                name: "Avocado",
+                emoji: "🥑",
+                calories: 160,
+                protein: "2 g",
+                carbs: "9 g",
+                fat: "15 g",
+                fiber: "7 g"
+            },
+
+            {
+                name: "Greek Yogurt",
+                emoji: "🥛",
+                calories: 100,
+                protein: "17 g",
+                carbs: "6 g",
+                fat: "0.7 g",
+                fiber: "0 g"
+            }
+
+        ];
+
+
+        /* ===============================================
+           NAVIGATION
+        ================================================ */
+
+        function showPage(pageName, button) {
+
+            document
+                .querySelectorAll(".page")
+                .forEach(function(page) {
+
+                    page.classList.remove("active");
+
+                });
+
+
+            document
+                .getElementById(pageName)
+                .classList.add("active");
+
+
+            document
+                .querySelectorAll(".nav-links button")
+                .forEach(function(btn) {
+
+                    btn.classList.remove("active");
+
+                });
+
+
+            if (button) {
+
+                button.classList.add("active");
+
+            }
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        function goToPage(pageName) {
+
+            const buttons =
+                document.querySelectorAll(
+                    ".nav-links button"
+                );
+
+
+            const positions = {
+                home: 0,
+                foods: 1,
+                tools: 2,
+                planner: 3,
+                tips: 4
+            };
+
+
+            showPage(
+                pageName,
+                buttons[positions[pageName]]
+            );
+
+        }
+
+
+        /* ===============================================
+           FOOD DISPLAY
+        ================================================ */
+
+        function displayFoods(list = foods) {
+
+            const grid =
+                document.getElementById(
+                    "foodGrid"
+                );
+
+
+            grid.innerHTML = "";
+
+
+            list.forEach(function(food, index) {
+
+                grid.innerHTML += `
+
+                    <div
+                        class="food-card"
+                        onclick="showFood(${foods.indexOf(food)})">
+
+                        <div class="food-emoji">
+                            ${food.emoji}
+                        </div>
+
+                        <h3>
+                            ${food.name}
+                        </h3>
+
+                        <p>
+                            ${food.calories} kcal
+                        </p>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        /* ===============================================
+           FOOD SEARCH
+        ================================================ */
+
+        function searchFood() {
+
+            const search =
+                document
+                    .getElementById("foodSearch")
+                    .value
+                    .toLowerCase();
+
+
+            const filtered =
+                foods.filter(function(food) {
+
+                    return food.name
+                        .toLowerCase()
+                        .includes(search);
+
+                });
+
+
+            displayFoods(filtered);
+
+
+            document
+                .getElementById("foodDetails")
+                .classList.remove("show");
+
+        }
+
+
+        /* ===============================================
+           FOOD DETAILS
+        ================================================ */
+
+        function showFood(index) {
+
+            const food =
+                foods[index];
+
+
+            const details =
+                document.getElementById(
+                    "foodDetails"
+                );
+
+
+            details.innerHTML = `
+
+                <h3>
+                    ${food.emoji}
+                    ${food.name}
+                </h3>
+
+                <div class="nutrition-row">
+                    <span>Calories</span>
+                    <strong>${food.calories} kcal</strong>
+                </div>
+
+                <div class="nutrition-row">
+                    <span>Protein</span>
+                    <strong>${food.protein}</strong>
+                </div>
+
+                <div class="nutrition-row">
+                    <span>Carbohydrates</span>
+                    <strong>${food.carbs}</strong>
+                </div>
+
+                <div class="nutrition-row">
+                    <span>Fat</span>
+                    <strong>${food.fat}</strong>
+                </div>
+
+                <div class="nutrition-row">
+                    <span>Fiber</span>
+                    <strong>${food.fiber}</strong>
+                </div>
+
+            `;
+
+
+            details.classList.add("show");
+
+        }
+
+
+        /* ===============================================
+           BMI
+        ================================================ */
+
+        function calculateBMI() {
+
+            const weight =
+                parseFloat(
+                    document.getElementById(
+                        "weight"
+                    ).value
+                );
+
+
+            const height =
+                parseFloat(
+                    document.getElementById(
+                        "height"
+                    ).value
+                );
+
+
+            if (
+                !weight ||
+                !height ||
+                weight <= 0 ||
+                height <= 0
+            ) {
+
+                alert(
+                    "Please enter valid weight and height."
+                );
+
+                return;
+
+            }
+
+
+            const heightMeter =
+                height / 100;
+
+
+            const bmi =
+                weight /
+                (heightMeter * heightMeter);
+
+
+            let category;
+
+
+            if (bmi < 18.5) {
+
+                category = "Underweight";
+
+            }
+            else if (bmi < 25) {
+
+                category = "Normal Weight";
+
+            }
+            else if (bmi < 30) {
+
+                category = "Overweight";
+
+            }
+            else {
+
+                category = "Obesity";
+
+            }
+
+
+            document.getElementById(
+                "bmiNumber"
+            ).textContent =
+                bmi.toFixed(1);
+
+
+            document.getElementById(
+                "bmiCategory"
+            ).textContent =
+                category;
+
+
+            document.getElementById(
+                "bmiResult"
+            ).classList.add("show");
+
+        }
+
+
+        /* ===============================================
+           CALORIES
+        ================================================ */
+
+        function calculateCalories() {
+
+            const age =
+                parseFloat(
+                    document.getElementById(
+                        "age"
+                    ).value
+                );
+
+
+            const gender =
+                document.getElementById(
+                    "gender"
+                ).value;
+
+
+            const weight =
+                parseFloat(
+                    document.getElementById(
+                        "calWeight"
+                    ).value
+                );
+
+
+            const height =
+                parseFloat(
+                    document.getElementById(
+                        "calHeight"
+                    ).value
+                );
+
+
+            const activity =
+                parseFloat(
+                    document.getElementById(
+                        "activity"
+                    ).value
+                );
+
+
+            if (
+                !age ||
+                !weight ||
+                !height
+            ) {
+
+                alert(
+                    "Please fill in all information."
+                );
+
+                return;
+
+            }
+
+
+            let bmr;
+
+
+            if (gender === "male") {
+
+                bmr =
+                    (10 * weight) +
+                    (6.25 * height) -
+                    (5 * age) +
+                    5;
+
+            }
+            else {
+
+                bmr =
+                    (10 * weight) +
+                    (6.25 * height) -
+                    (5 * age) -
+                    161;
+
+            }
+
+
+            const maintain =
+                Math.round(
+                    bmr * activity
+                );
+
+
+            const lose =
+                maintain - 500;
+
+
+            const gain =
+                maintain + 300;
+
+
+            document.getElementById(
+                "lose"
+            ).textContent =
+                lose;
+
+
+            document.getElementById(
+                "maintain"
+            ).textContent =
+                maintain;
+
+
+            document.getElementById(
+                "gain"
+            ).textContent =
+                gain;
+
+
+            document.getElementById(
+                "calorieResult"
+            ).classList.add("show");
+
+        }
+
+
+        /* ===============================================
+           WATER TRACKER
+        ================================================ */
+
+        let water = 0;
+
+
+        function createWaterCups() {
+
+            const container =
+                document.getElementById(
+                    "waterCups"
+                );
+
+
+            container.innerHTML = "";
+
+
+            for (
+                let i = 0;
+                i < 8;
+                i++
+            ) {
+
+                const cup =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                cup.className =
+                    "water-cup";
+
+
+                cup.textContent = "💧";
+
+
+                if (i < water) {
+
+                    cup.classList.add(
+                        "filled"
+                    );
+
+                }
+
+
+                cup.onclick =
+                    function() {
+
+                        water = i + 1;
+
+                        createWaterCups();
+
+                    };
+
+
+                container.appendChild(cup);
+
+            }
+
+
+            const message =
+                document.getElementById(
+                    "waterMessage"
+                );
+
+
+            if (water === 0) {
+
+                message.textContent =
+                    "Start drinking water!";
+
+            }
+            else if (water < 4) {
+
+                message.textContent =
+                    water +
+                    " glasses completed. Keep going!";
+
+            }
+            else if (water < 8) {
+
+                message.textContent =
+                    water +
+                    " glasses completed. Almost there!";
+
+            }
+            else {
+
+                message.textContent =
+                    "🎉 Daily water goal completed!";
+
+            }
+
+        }
+
+
+        /* ===============================================
+           MEAL PLANNER
+        ================================================ */
+
+        const meals = [
+            {
+                name: "Breakfast",
+                icon: "🌅"
+            },
+            {
+                name: "Lunch",
+                icon: "☀️"
+            },
+            {
+                name: "Snack",
+                icon: "🍎"
+            },
+            {
+                name: "Dinner",
+                icon: "🌙"
+            }
+        ];
+
+
+        let selectedMeal = null;
+
+        let mealData = {};
+
+
+        function createMealPlanner() {
+
+            const grid =
+                document.getElementById(
+                    "mealGrid"
+                );
+
+
+            grid.innerHTML = "";
+
+
+            meals.forEach(function(meal, index) {
+
+                const selected =
+                    mealData[index];
+
+
+                grid.innerHTML += `
+
+                    <div
+                        class="meal-card
+                        ${selected ? "selected" : ""}"
+                        onclick="openMeal(${index})">
+
+                        <div class="meal-icon">
+                            ${selected
+                                ? selected.emoji
+                                : meal.icon}
+                        </div>
+
+                        <h3>
+                            ${meal.name}
+                        </h3>
+
+                        <p>
+                            ${
+                                selected
+                                ? selected.name +
+                                  " · " +
+                                  selected.calories +
+                                  " kcal"
+                                : "Click to add food"
+                            }
+                        </p>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        function openMeal(index) {
+
+            selectedMeal = index;
+
+
+            const options =
+                document.getElementById(
+                    "mealFoods"
+                );
+
+
+            options.innerHTML = "";
+
+
+            foods.slice(0, 6)
+                .forEach(function(food, foodIndex) {
+
+                    options.innerHTML += `
+
+                        <div
+                            class="food-card"
+                            onclick="selectMeal(${foodIndex})">
+
+                            <div class="food-emoji">
+                                ${food.emoji}
+                            </div>
+
+                            <h3>
+                                ${food.name}
+                            </h3>
+
+                            <p>
+                                ${food.calories} kcal
+                            </p>
+
+                        </div>
+
+                    `;
+
+                });
+
+
+            document
+                .getElementById(
+                    "mealOptions"
+                )
+                .classList.add("show");
+
+        }
+
+
+        function selectMeal(foodIndex) {
+
+            mealData[selectedMeal] =
+                foods[foodIndex];
+
+
+            document
+                .getElementById(
+                    "mealOptions"
+                )
+                .classList.remove("show");
+
+
+            createMealPlanner();
+
+
+            calculateTotalCalories();
+
+        }
+
+
+        function calculateTotalCalories() {
+
+            let total = 0;
+
+
+            Object.values(mealData)
+                .forEach(function(food) {
+
+                    total += food.calories;
+
+                });
+
+
+            document.getElementById(
+                "totalCalories"
+            ).textContent =
+                total + " kcal";
+
+        }
+
+
+        /* ===============================================
+           HEALTH TIPS
+        ================================================ */
+
+        const tips = [
+
+            {
+                icon: "💧",
+                title: "Drink Water",
+                text: "Stay hydrated throughout the day."
+            },
+
+            {
+                icon: "🥗",
+                title: "Eat Vegetables",
+                text: "Include a variety of vegetables in your meals."
+            },
+
+            {
+                icon: "🍎",
+                title: "Eat Fruits",
+                text: "Choose fresh fruits as nutritious snacks."
+            },
+
+            {
+                icon: "🏃",
+                title: "Stay Active",
+                text: "Regular physical activity supports overall health."
+            },
+
+            {
+                icon: "😴",
+                title: "Sleep Well",
+                text: "Maintain a consistent sleep schedule."
+            },
+
+            {
+                icon: "🧘",
+                title: "Manage Stress",
+                text: "Take time for relaxation and mental wellbeing."
+            },
+
+            {
+                icon: "🍽️",
+                title: "Eat Mindfully",
+                text: "Eat slowly and pay attention to hunger signals."
+            },
+
+            {
+                icon: "🌾",
+                title: "Choose Whole Grains",
+                text: "Include whole grains as part of a balanced diet."
+            },
+
+            {
+                icon: "🥚",
+                title: "Include Protein",
+                text: "Include healthy protein sources in your meals."
+            },
+
+            {
+                icon: "🧂",
+                title: "Limit Excess Salt",
+                text: "Try to reduce highly processed salty foods."
+            }
+
+        ];
+
+
+        function createTips() {
+
+            const list =
+                document.getElementById(
+                    "tipList"
+                );
+
+
+            list.innerHTML = "";
+
+
+            tips.forEach(function(tip) {
+
+                list.innerHTML += `
+
+                    <div class="tip">
+
+                        <div class="tip-icon">
+                            ${tip.icon}
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                ${tip.title}
+                            </h3>
+
+                            <p>
+                                ${tip.text}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        /* ===============================================
+           START WEBSITE
+        ================================================ */
+
+        displayFoods();
+
+        createWaterCups();
+
+        createMealPlanner();
+
+        createTips();
+
+    </script>
+
+</body>
+</html>
