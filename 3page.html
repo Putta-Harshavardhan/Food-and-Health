@@ -4,9 +4,131 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BMI Calculator</title>
+    <style>
+      .heading {
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+      .bound {
+        border: 0px;
+        padding: 20px;
+        width: 800px;
+        margin: auto;
+        text-align: justify;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+        display: flex;
+        height: 100%;
+        gap: 30px;
+      }
+      .bound1 {
+        border: 0px;
+        padding: 20px;
+        width: 800px;
+        margin: auto;
+        text-align: justify;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        display: flex;
+        height: 100%;
+        gap: 30px;
+      }
+      .bound2 {
+        border: 0px;
+        padding: 20px;
+        width: 800px;
+        margin: auto;
+
+        text-align: justify;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        display: flex;
+        height: 100%;
+        gap: 30px;
+      }
+      input {
+        width: 100%;
+        padding: 8px;
+        margin: 0;
+        height: 100%;
+        box-sizing: border-box;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
-    <h1>BMI Calculator</h1>
-    <p>This is the BMI Calculator page.</p>
+    <h2 style="margin: 0px; border: 0px">
+      Nutri Life - food and health website
+    </h2>
+    <br />
+    <br />
+    <br />
+    <div class="heading">
+      <h2>Health Tools</h2>
+      <h5>Measure Your BMI and Daily Calorie Needs</h5>
+    </div>
+    <div style="padding: 0px; border-color: white">
+      <form class="bound">
+        <label for="weight">Weight (kg):</label>
+        <input
+          class="input"
+          type="text"
+          id="weight"
+          placeholder="ex:- 60"
+          required
+        /><br /><br />
+        <label for="height">Height (cm):</label>
+        <input
+          class="input"
+          type="text"
+          id="height"
+          placeholder="ex:- 170"
+          required
+        /><br /><br />
+      </form>
+      <form class="bound1">
+        <label for="Age">Age (years):</label>
+        <input
+          class="input"
+          type="text"
+          id="Age"
+          placeholder="ex:- 60"
+          required
+        /><br /><br />
+        <label for="Gender">Gender:</label>
+        <select id="Gender" required style="cursor: pointer">
+          <label for="Gender">Gender:</label>
+          <option id="Gender" value="Male" required>Male</option>
+          <option id="Gender" value="Female" required>Female</option>
+          <option id="Gender" value="Other" required>Mentally ill</option>
+        </select>
+        <br /><br />
+      </form>
+      <form class="bound1">
+        <label for="Activity1">Activity Level:</label>
+        <select id="Activity1" required style="cursor: pointer">
+          <option value="Sedentary">Sedentary (little or no exercise)</option>
+          <option value="Lightly Active">
+            Lightly Active (light exercise/sports 1-3 days/week)
+          </option>
+          <option value="Moderately Active">
+            Moderately Active (moderate exercise/sports 3-5 days/week)
+          </option>
+          <option value="Very Active">
+            Very Active (hard exercise/sports 6-7 days a week)
+          </option>
+          <option value="Extra Active">
+            Extra Active (very hard exercise/sports & physical job or 2x
+            training)
+          </option></select
+        ><br /><br />
+      </form>
+      <form class="bound2">
+        <input
+          type="button"
+          value="Calculate"
+          onclick="calculateBMI()"
+          style="background-color: #0ca648; font-weight: bold; cursor: pointer"
+        />
+      </form>
+    </div>
   </body>
 </html>
